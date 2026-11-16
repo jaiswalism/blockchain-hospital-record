@@ -1,13 +1,25 @@
-# MediBlock — Decentralized Hospital & Healthcare Records System
+# MediBlock — Decentralized Healthcare & Medical Records System
 
-[![Solidity](https://img.shields.io/badge/Solidity-0.4.26-blue.svg?logo=solidity)](https://soliditylang.org/)
-[![Ethereum](https://img.shields.io/badge/Network-Sepolia%20Testnet-627EEA.svg?logo=ethereum)](https://sepolia.etherscan.io/)
-[![Next.js](https://img.shields.io/badge/Frontend-Next.js%209-black.svg?logo=next.js)](https://nextjs.org/)
-[![Web3.js](https://img.shields.io/badge/Web3-1.3.6-F16822.svg?logo=web3.js)](https://web3js.readthedocs.io/)
-[![Mocha Tests](https://img.shields.io/badge/Unit%20Tests-8%20Passing-success.svg)](https://mochajs.org/)
-[![License: ISC](https://img.shields.io/badge/License-ISC-green.svg)](https://opensource.org/licenses/ISC)
+[![Solidity](https://img.shields.io/badge/Solidity-0.4.26-363636.svg?logo=solidity&logoColor=white)](https://soliditylang.org/)
+[![Ethereum Sepolia](https://img.shields.io/badge/Network-Sepolia%20Testnet-627EEA.svg?logo=ethereum&logoColor=white)](https://sepolia.etherscan.io/address/0xB1Af58d43fDf8e5a637BcdeBB52DfE1E32AF0f2D)
+[![Contract](https://img.shields.io/badge/Contract-0xB1Af...0f2D-FF4D2D.svg?logo=ethereum&logoColor=white)](https://sepolia.etherscan.io/address/0xB1Af58d43fDf8e5a637BcdeBB52DfE1E32AF0f2D)
+[![Next.js](https://img.shields.io/badge/Frontend-Next.js%209-black.svg?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Web3.js](https://img.shields.io/badge/Web3.js-1.3.6-F16822.svg?logo=web3.js&logoColor=white)](https://web3js.readthedocs.io/)
+[![Mocha Tests](https://img.shields.io/badge/Unit%20Tests-8%20Passing-success.svg?logo=mocha&logoColor=white)](https://mochajs.org/)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
-> **MediBlock** is a patient-sovereign, decentralized medical records and hospital management platform built on **Ethereum**. It eliminates single points of failure in traditional Electronic Health Record (EHR) databases by enforcing cryptographic consent, immutable clinical audit trails, and role-verified practitioner credentials via smart contracts.
+> **MediBlock** is a patient-sovereign, decentralized electronic health records (EHR) and hospital management platform built on **Ethereum**. By enforcing cryptographic consent, immutable clinical consultation history, role-based access control, and hospital-verified practitioner credentials, MediBlock eliminates single points of failure in centralized healthcare databases while keeping patients in full control of their medical records.
+
+---
+
+## 🌐 Live Smart Contract (Sepolia Testnet)
+
+| Parameter | Value |
+|---|---|
+| **Network** | Ethereum Sepolia Testnet |
+| **Contract Address** | [`0xB1Af58d43fDf8e5a637BcdeBB52DfE1E32AF0f2D`](https://sepolia.etherscan.io/address/0xB1Af58d43fDf8e5a637BcdeBB52DfE1E32AF0f2D) |
+| **Contract Deployer (Admin)** | [`0xd6aa237Efb610C2c4eF7a27878a8b79f874226E9`](https://sepolia.etherscan.io/address/0xd6aa237Efb610C2c4eF7a27878a8b79f874226E9) |
+| **Explorer** | [View on Sepolia Etherscan](https://sepolia.etherscan.io/address/0xB1Af58d43fDf8e5a637BcdeBB52DfE1E32AF0f2D) |
 
 ---
 
@@ -17,16 +29,18 @@
 
 ```mermaid
 flowchart TD
-    subgraph Client["Client Application Layer (Next.js & Web3)"]
-        UI["Web3 UI Design System<br/>(Ember & Obsidian Dark Theme)"]
+    subgraph Client["Client Application Layer (Next.js & Web3.js)"]
+        UI["Web3 UI Design System<br/>(Obsidian & Ember Dark Theme)"]
+        Nav["Role-Aware Dynamic Navigation<br/>(Real-Time MetaMask Reactivity)"]
         Wallet["MetaMask Browser Wallet<br/>(Ethereum Sepolia / Local Ganache)"]
-        UI <--> Wallet
+        UI <--> Nav
+        Nav <--> Wallet
     end
 
-    subgraph Portals["Role-Based Portals"]
-        Patient["Patient Sovereign Portal<br/>• Profile Registration (/register-patient)<br/>• Doctor Consent Control (/approve-doctor)<br/>• Access Revocation (/revoke-doctor)"]
-        Doctor["Doctor Clinical Suite<br/>• Medical Credential Registration (/register-doctor)<br/>• Consultation & Prescriptions (/make-appointment)<br/>• Follow-up Updates (/edit-appointment)"]
-        Admin["Hospital Admin Hub<br/>• Practitioner Verification Panel (/dashboard)<br/>• Live Telemetry & Recharts Growth Analytics"]
+    subgraph Portals["Role-Specific Portals"]
+        Patient["👤 Patient Sovereign Portal<br/>• Self Registration (/register-patient)<br/>• Immutable Health Records (/details)<br/>• Doctor Consent Authorization (/approve-doctor)<br/>• Instant Access Revocation (/revoke-doctor)"]
+        Doctor["🩺 Doctor Clinical Suite<br/>• Credential Registration (/register-doctor)<br/>• Consultation & Prescription Entry (/make-appointment)<br/>• Follow-Up Consultation Updates (/edit-appointment)"]
+        Admin["🛡️ Hospital Admin Hub<br/>• Practitioner Verification Panel (/dashboard)<br/>• Live Analytics & Growth Telemetry"]
     end
 
     UI --> Patient
@@ -41,13 +55,13 @@ flowchart TD
 
         Registry --> AdminModule
         Patient --> Consent
-        Doctor -. Requires Verification & Consent .-> Appointments
+        Doctor -. Requires Verification & Patient Consent .-> Appointments
         Consent -. isApproved Check .-> Appointments
     end
 
-    subgraph Storage["Storage & Consensus Layer"]
-        EVM["Ethereum Sepolia Blockchain<br/>• Smart Contract State<br/>• Audit Trails & Timestamps<br/>• Permission Mappings"]
-        IPFS["Off-Chain Decentralized Storage (Phase 4)<br/>• AES-256 Encrypted Clinical Payloads<br/>• CID Content Hashes Stored On-Chain"]
+    subgraph Storage["Consensus & Storage Layer"]
+        EVM["Ethereum Sepolia Blockchain<br/>• Smart Contract State<br/>• Cryptographic Access Mappings<br/>• Tamper-Proof Audit Trails"]
+        IPFS["Off-Chain Decentralized Storage (Phase 4)<br/>• AES-256 Encrypted Clinical Payloads<br/>• On-Chain CID Hashes"]
     end
 
     Wallet --> EVM
@@ -57,141 +71,98 @@ flowchart TD
 
 ---
 
-### Consent & Clinical Consultation Sequence Diagram
+### Consent & Clinical Consultation Sequence
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Patient as Patient (Wallet)
-    actor Doctor as Doctor (Wallet)
+    actor Patient as Patient (MetaMask)
+    actor Doctor as Doctor (MetaMask)
     actor Admin as Hospital Admin (Contract Owner)
     participant Contract as Record.sol (Sepolia EVM)
 
-    Note over Admin,Contract: Step 1: Doctor Registration & Verification
-    Doctor->>Contract: setDoctor(ic, name, qualification, major)
-    Contract-->>Doctor: DoctorRegistered (Status: Pending)
+    Note over Admin,Contract: Step 1: Doctor Credential Registration & Admin Verification
+    Doctor->>Contract: setDoctor(ic, name, phone, gender, dob, qualification, major)
+    Contract-->>Doctor: DoctorRegistered (Status: Pending Verification)
     Admin->>Contract: verifyDoctor(doctorAddress)
-    Contract-->>Admin: DoctorVerified (Status: Active Practitioner)
+    Contract-->>Admin: DoctorVerified (Status: Active & Authorized)
 
-    Note over Patient,Contract: Step 2: Patient Registration & Consent
-    Patient->>Contract: setDetails(ic, name, bloodGroup, allergies, ...)
+    Note over Patient,Contract: Step 2: Patient Registration & Consent Authorization
+    Patient->>Contract: setDetails(ic, name, phone, gender, dob, height, weight, houseaddr, bloodgroup, allergies, medication, emergencyName, emergencyContact)
     Contract-->>Patient: PatientRegistered
     Patient->>Contract: givePermission(doctorAddress)
     Contract-->>Patient: AccessGranted [isApproved = true]
 
     Note over Doctor,Contract: Step 3: Consultation & Prescription Logging
     Doctor->>Contract: searchPatientDemographic(patientAddress)
-    Contract->>Contract: Check isApproved[patient][doctor]
-    Contract-->>Doctor: Returns Demographic & Baseline Data
+    Contract->>Contract: Verify isApproved[patientAddress][doctorAddress] == true
+    Contract-->>Doctor: Returns Demographic Data
 
-    Doctor->>Contract: setAppointment(patientAddress, diagnosis, prescription, status)
-    Contract->>Contract: Verify (isDoctorVerified == true) && (isApproved == true)
-    Contract->>Contract: Store in appointmentsList & map to patient
+    Doctor->>Contract: setAppointment(patientAddress, date, time, diagnosis, prescription, description, status)
+    Contract->>Contract: Verify isDoctorVerified == true AND isApproved == true
+    Contract->>Contract: Append to appointmentsList and map to patientAppointments
     Contract-->>Doctor: AppointmentCreated (Appointment ID #)
-    Note over Doctor,Patient: Appointment logged permanently without overwriting past visits
+    Note over Doctor,Patient: Consultation history is appended immutably — past records are never overwritten!
 ```
 
 ---
 
-## 2. Process Breakdown & Task Roadmap
+## 2. Key Features
 
-### Phase 0: Secrets & Repository Hygiene [COMPLETED]
-- [x] **Secret Rotation & Isolation:** Deprecated exposed Infura keys and hardcoded private seed phrases.
-- [x] **Environment Variable Management:** Created `.env.example` with template variables for `RPC_URL`, `DEPLOYER_MNEMONIC`, and `NEXT_PUBLIC_CONTRACT_ADDRESS`.
-- [x] **Secure Script Config:** Refactored `ethereum/deploy.js` and `ethereum/web3.js` to safely read environment variables using `dotenv`.
-- [x] **Dependency Optimization:** Removed unused `electron` devDependency from `package.json`.
-
----
-
-### Phase 1: Smart Contract Security & Bug Fixes [COMPLETED]
-- [x] **Task 1.1: Multi-Appointment Storage:** Refactored `Record.sol` to index appointments via `Appointments[] public appointmentsList` and `mapping(address => uint[]) patientAppointments`. Appointments are never overwritten on follow-up visits.
-- [x] **Task 1.2: Strict Consent Enforcement on Writes:** `setAppointment` strictly enforces `require(isApproved[_addr][msg.sender])`. Unapproved doctors cannot write to patient records.
-- [x] **Task 1.3: Access-Gated Record Search:** Added cryptographic permission checks to `searchAppointment` so only the patient, the attending physician, or the admin can read sensitive prescriptions and diagnoses.
-- [x] **Task 1.4: Admin Doctor Verification System:** Implemented `verifyDoctor(address)` so newly registered doctors require admin approval before issuing clinical appointments.
-- [x] **Task 1.5: Permission Counter Accuracy:** Fixed `permissionGrantedCount` to increment only on first grant and properly decrement on revocation.
-- [x] **Task 1.6: EVM Input Validation:** Added zero-address validations (`require(_addr != address(0))`) and non-empty string checks.
-- [x] **Task 1.7: Comprehensive Event Logging:** Added `PatientRegistered`, `DoctorRegistered`, `DoctorVerified`, `AccessGranted`, `AccessRevoked`, `AppointmentCreated`, and `AppointmentUpdated`.
-- [x] **Task 1.8: Consultation Edit Protection:** `updateAppointment` requires the caller to be the doctor who created the record (or contract owner).
+- **🔐 Cryptographic Patient Consent:** Doctors cannot read patient medical histories or write consultations without explicit, signed patient approval (`givePermission`). Consent can be revoked instantly at any time (`RevokePermission`).
+- **🩺 Hospital Admin Doctor Verification:** Prevents rogue actors from posing as physicians. Registered doctors must be approved by the hospital contract owner before they can issue medical consultations.
+- **📜 Multi-Consultation Append-Only History:** Fixes legacy contract bugs by indexing all consultations in an array (`appointmentsList`). Patient visits and prescription logs are preserved immutably over time.
+- **🧭 Dynamic Role-Aware Navigation:** The frontend header dynamically queries `isPatient`, `isDoctor`, and `owner()`. Patients only see patient tools, doctors only see clinical workflows, and new users see registration prompts.
+- **🎨 Obsidian & Ember Web3 UI:** Built with a high-contrast dark aesthetic, glassmorphic containers, ember radial gradients, and interactive workflow simulators.
+- **📊 Real-Time Analytics Dashboard:** Visualizes hospital growth metrics (patient-to-doctor ratios, monthly onboarding charts) using Recharts with built-in zero-division safety.
 
 ---
 
-### Phase 2: Frontend Design System & Role-Based UX [COMPLETED]
-- [x] **Task 2.1: Modern Web3 Visual Identity:** Redesigned UI with deep obsidian (`#090A0E`), atmospheric ember sunset radial glow, and fiery orange (`#FF4D2D`) accents matching Web3 inspiration designs.
-- [x] **Task 2.2: Redesigned Landing Page (`/`):** Interactive hero architecture simulator (Patient Flow vs. Doctor Flow) and 3-tier comparative role cards.
-- [x] **Task 2.3: Real-Time Wallet Status Header (`components/MenuBar.js`):** Sticky glassmorphic navigation with live connected MetaMask wallet pill (`● 0x... (Sepolia)`).
-- [x] **Task 2.4: Real Error Messaging:** Replaced generic "account already exists" alerts with specific feedback (user rejected tx, unauthorized access, or validation failures).
-- [x] **Task 2.5: No More Alert Popups:** Replaced all browser `alert()` calls with inline status banners and transaction progress loaders.
-- [x] **Task 2.6: Dashboard Telemetry & Admin Panel (`/dashboard`):** Grouped registration timelines by month-year, fixed divide-by-zero risks, and added an **Admin Doctor Verification Panel**.
-- [x] **Task 2.7: Consent Gateways (`/approve-doctor`, `/revoke-doctor`):** Added directory of registered doctors for one-click access granting, and active grants list with one-click revocation.
-- [x] **Task 2.8: Consultation Workflow (`/make-appointment`):** Added authorized patient dropdown to prevent manual copy-paste of hex addresses.
-- [x] **Task 2.9: Safe Client Hydration:** Migrated wallet-dependent reads (`web3.eth.getAccounts()`) to `componentDidMount` to eliminate SSR crashes.
+## 3. Dynamic Role-Aware Navigation Matrix
 
----
-
-### Phase 3: Automated Testing & Verification [COMPLETED]
-- [x] **Task 3.1: Ganache & Mocha Test Suite:** Expanded `test/Record.test.js` to 8 comprehensive unit tests covering:
-  1. Contract deployment & owner assignment.
-  2. Patient record creation.
-  3. Revert on duplicate patient registration.
-  4. Doctor registration & admin verification enforcement.
-  5. Consent requirement for appointment creation.
-  6. Non-overwriting multiple appointment history.
-  7. Accurate grant/revoke counter tracking.
-  8. Access denial for revoked doctors.
-- [x] **Task 3.2: Production Build Verification:** Verified Next.js 12-page static and dynamic production build with zero errors.
-
----
-
-### Phase 4: Encrypted Off-Chain Storage (IPFS) [UP NEXT / PLANNED]
-- [ ] **Task 4.1: Off-Chain Architecture:** Store only cryptographic hashes and IPFS Content Identifiers (CIDs) on-chain; sensitive data (names, IC, allergies, prescriptions) stored off-chain.
-- [ ] **Task 4.2: Client-Side Encryption:** Implement AES-256-GCM record encryption using random symmetric keys wrapped with doctor/patient public keys (ECIES or Lit Protocol).
-- [ ] **Task 4.3: Decentralized Pinning:** Integrate Pinata / web3.storage API for decentralized storage.
-- [ ] **Task 4.4: File Attachments:** Enable upload of lab reports, blood work PDFs, and medical scans.
-
----
-
-### Phase 5: Advanced Healthcare & Compliance Features [FUTURE]
-- [ ] **Task 5.1: Expirable & Scoped Consent:** Implement access expiration timestamps (e.g. 7-day emergency grant) and scoped categories (Labs Only, Imaging Only).
-- [ ] **Task 5.2: Audit Trail Log:** Patient dashboard displaying a chronological timeline of which doctors viewed their record and when.
-- [ ] **Task 5.3: Emergency Break-Glass Override:** Emergency QR-code access for first responders with logged on-chain alerts.
-- [ ] **Task 5.4: HL7 FHIR Standard Mapping:** Standardize patient records to match international HL7 FHIR and ICD-10 medical terminology.
-
----
-
-## 3. Web3 Design System Tokens
-
-| Token | Value | Description |
+| User Role | Visible Navigation Items | Wallet Pill Status Badge |
 |---|---|---|
-| `--bg-canvas` | `#090A0E` | Deep Obsidian Pitch Dark Canvas |
-| `--bg-surface` | `#12141B` | Elevated Surface Background |
-| `--bg-surface-glass` | `rgba(18, 20, 27, 0.85)` | Glassmorphic Translucent Card Surface |
-| `--accent-primary` | `#FF4D2D` | Vibrant Fiery Ember Red-Orange |
-| `--accent-hover` | `#FF6647` | Active / Hover Accent State |
-| `--accent-glow` | `rgba(255, 77, 45, 0.45)` | Button & Active Card Glowing Aura |
-| `--accent-pill-bg` | `rgba(255, 77, 45, 0.08)` | Translucent Announcement Pill Background |
-| `--accent-pill-border` | `rgba(255, 77, 45, 0.32)` | Announcement Pill Border Highlight |
-| `--border-subtle` | `rgba(255, 255, 255, 0.08)` | Card & Container Hairline Dividers |
-| `--status-success` | `#10B981` | Verified Practitioner & Active Status |
+| **👤 Patient** | `Home`, `Dashboard`, `Directory`, `My Health Record`, `Consent & Permissions` (Grant/Revoke), `Edit Details` | `[Patient Name] 0x... 👤 PATIENT` |
+| **🩺 Doctor** | `Home`, `Dashboard`, `Directory`, `Doctor Profile`, `Consultations` (New Consult, Update Consult, Edit Profile) | `[Doctor Name] 0x... 🩺 DOCTOR ✓` |
+| **🛡️ Admin / Owner** | Full system visibility + Exclusive **Doctor Verification Panel** on `/dashboard` | `0x... 🛡️ ADMIN` |
+| **🆕 Unregistered User** | `Home`, `Dashboard`, `Directory`, `Register` dropdown (Register as Patient / Doctor) | `0x... NEW USER` |
+| **⚠️ Wrong Network** | Automatic detection when the smart contract is not deployed on the current network | `0x... ⚠️ CONTRACT NOT ON NETWORK` |
 
 ---
 
-## 4. Project Directory Structure
+## 4. Web3 Design System Tokens
+
+| Design Token | CSS Variable | Hex / RGBA Value | Role / Usage |
+|---|---|---|---|
+| **Deep Canvas** | `--bg-canvas` | `#090A0E` | Dark obsidian baseline background |
+| **Surface** | `--bg-surface` | `#12141B` | Raised panel and table container background |
+| **Glass Surface** | `--bg-surface-glass` | `rgba(18, 20, 27, 0.85)` | Glassmorphic cards with backdrop blur |
+| **Ember Accent** | `--accent-primary` | `#FF4D2D` | Primary brand accent & action buttons |
+| **Ember Hover** | `--accent-hover` | `#FF6647` | Interactive button and link hover state |
+| **Radial Glow** | `--accent-glow` | `rgba(255, 77, 45, 0.45)` | Atmospheric hero ambient glow |
+| **Success / Verified** | `--status-success` | `#10B981` | Verified practitioner badge & confirmations |
+| **Cyan Patient** | `--patient-cyan` | `#38BDF8` | Patient badges and medical record accents |
+
+---
+
+## 5. Project Directory Structure
 
 ```text
 blockchain-hospital-record/
 ├── components/
 │   ├── Layout.js            # Global layout, Head metadata & embedded dark theme
-│   ├── MenuBar.js           # Responsive navigation header with live MetaMask status
+│   ├── MenuBar.js           # Dynamic role-aware navigation with MetaMask reactivity
 │   └── theme.css            # MediBlock Ember-Obsidian CSS variables & design tokens
 ├── ethereum/
 │   ├── build/
 │   │   └── Record.json      # Compiled contract ABI & bytecode artifact
 │   ├── contracts/
 │   │   └── Record.sol       # Solidity 0.4.26 smart contract with consent & verification
-│   ├── compile.js           # Smart contract compilation script
-│   ├── deploy.js            # Sepolia testnet deployment script (via Infura)
-│   ├── record.js            # Initialized web3 Contract instance
-│   └── web3.js              # Web3 provider (MetaMask / Infura HTTP fallback)
+│   ├── compile.js           # Smart contract compilation script (solc)
+│   ├── deploy.js            # Real-network Sepolia deployment runner (supports Private Key / Mnemonic)
+│   ├── deploy-local.js      # Zero-cost local Ganache deployment script
+│   ├── record.js            # Web3 Contract instance loader with live fallback
+│   └── web3.js              # Web3 provider (MetaMask / Public Sepolia RPC fallback)
 ├── pages/
 │   ├── index.js             # Web3 Landing Page (Hero, Flow Simulator, 3-Tier Cards)
 │   ├── dashboard.js         # Hospital Analytics & Admin Doctor Verification Hub
@@ -207,106 +178,232 @@ blockchain-hospital-record/
 │   ├── edit-patient.js      # Patient personal profile editor
 │   └── edit-doctor.js       # Doctor professional profile editor
 ├── test/
-│   └── Record.test.js       # Mocha + Ganache automated test suite (8 tests)
+│   └── Record.test.js       # Mocha + Ganache automated test suite (8 passing unit tests)
 ├── .env.example             # Environment variables template
 ├── package.json             # Scripts & dependencies
 ├── routes.js                # Next-routes dynamic route definitions
 ├── server.js                # Custom Node.js HTTP server for Next-routes
-└── README.md                # Project documentation & architecture
+└── README.md                # Project documentation, architecture & roadmap
 ```
 
 ---
 
-## 5. Getting Started
+## 6. Quickstart Guide
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) v18+ or v22+
 - [MetaMask](https://metamask.io/) browser extension installed
-- Sepolia Testnet ETH (from any [Sepolia Faucet](https://sepoliafaucet.com/))
+- Sepolia Testnet ETH (from [Sepolia Faucet](https://sepoliafaucet.com/)) or a local Ganache instance
 
-### Installation
+### 1. Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/gensine/blockchain-hospital-record.git
-   cd blockchain-hospital-record
-   ```
+```bash
+git clone https://github.com/gensine/blockchain-hospital-record.git
+cd blockchain-hospital-record
+npm install --legacy-peer-deps
+```
 
-2. **Install project dependencies:**
-   ```bash
-   npm install --legacy-peer-deps
-   ```
+### 2. Environment Configuration
 
-3. **Configure Environment Variables:**
-   Create a `.env` file in the project root:
-   ```bash
-   cp .env.example .env
-   ```
-   Fill in your RPC URL and deployer credentials:
-   ```env
-   RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID
-   NEXT_PUBLIC_RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID
-   DEPLOYER_MNEMONIC="your twelve word seed phrase here"
-   NEXT_PUBLIC_CONTRACT_ADDRESS=0x876a8101E934d032EAB97aA800f03159A60b327E
-   ```
+Copy the example environment file:
+```bash
+cp .env.example .env
+```
 
-4. **Compile Smart Contract:**
-   ```bash
-   npm run compile
-   ```
+Your `.env` comes pre-configured with a public Sepolia RPC:
+```env
+RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
+NEXT_PUBLIC_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
+NEXT_PUBLIC_CONTRACT_ADDRESS=0xB1Af58d43fDf8e5a637BcdeBB52DfE1E32AF0f2D
+```
 
-5. **Run the Automated Test Suite:**
-   ```bash
-   npm test
-   ```
+### 3. Run Automated Unit Tests
 
-6. **Start the Development Server:**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+Execute the 8 Mocha smart contract test suites:
+```bash
+npm test
+```
 
-7. **Production Build:**
-   ```bash
-   npm run build
-   ```
+Expected output:
+```text
+  MediBlock Smart Contract Tests
+    ✔ can deploy record contract and assign owner as verified (235ms)
+    ✔ can register a patient record (746ms)
+    ✔ prevents duplicate patient registration (1194ms)
+    ✔ can register a doctor and only admin can verify them (1339ms)
+    ✔ enforces patient consent and doctor verification for appointment creation (4196ms)
+    ✔ stores multiple appointments without overwriting history (4600ms)
+    ✔ correctly tracks permissionGrantedCount upon grants and revokes (2390ms)
+    ✔ revoked doctor loses access to search patient details (1637ms)
+
+  8 passing (19s)
+```
+
+### 4. Start the Application
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser with MetaMask switched to **Sepolia**.
 
 ---
 
-## 6. Smart Contract Reference (`Record.sol`)
+## 7. Smart Contract Deployment (Optional)
+
+### Option A: Deploy to Sepolia Testnet
+To deploy your own instance of `Record.sol` to Sepolia:
+1. Export your test account private key from MetaMask (**Account Details &rarr; Show Private Key**).
+2. Add it to `.env`:
+   ```env
+   DEPLOYER_PRIVATE_KEY=your_private_key_here
+   ```
+3. Run:
+   ```bash
+   npm run deploy
+   ```
+   *The script automatically verifies your balance, deploys the contract, prints the Etherscan URL, and updates `NEXT_PUBLIC_CONTRACT_ADDRESS` in `.env`.*
+
+### Option B: Zero-Cost Local Testing (Ganache)
+To test locally without spending testnet ETH:
+1. Start Ganache CLI:
+   ```bash
+   npx ganache-cli -p 8545 -d
+   ```
+2. In a separate terminal, deploy locally:
+   ```bash
+   npm run deploy:local
+   ```
+3. Add a custom network in MetaMask (`http://127.0.0.1:8545`, Chain ID: `1337`), import one of Ganache's private keys, and start the app (`npm run dev`).
+
+---
+
+## 8. Smart Contract Reference (`Record.sol`)
 
 ### Key State Mappings
-- `isPatient(address => bool)`: Verifies if a wallet address has an active patient record.
-- `isDoctor(address => bool)`: Verifies if a wallet address has a doctor profile.
-- `isDoctorVerified(address => bool)`: Indicates whether the hospital admin has verified the doctor.
+- `isPatient(address => bool)`: Verifies if an address has an existing patient record.
+- `isDoctor(address => bool)`: Verifies if an address is registered as a physician.
+- `isDoctorVerified(address => bool)`: Tracks hospital admin approval status for physicians.
 - `isApproved(address patient => mapping(address doctor => bool))`: Cryptographic consent mapping.
-- `patientAppointments(address => uint[])`: List of appointment IDs associated with a patient.
+- `patientAppointments(address => uint[])`: Array of consultation IDs associated with a patient.
 
 ### Primary Functions
-| Function | Access | Description |
+| Function | Access Modifier | Description |
 |---|---|---|
 | `setDetails(...)` | Public (Unregistered) | Registers a new patient record with demographic & baseline clinical info |
-| `setDoctor(...)` | Public (Unregistered) | Registers a new doctor profile (Status: Pending Verification) |
-| `verifyDoctor(address)` | Owner / Admin Only | Approves a registered doctor, enabling them to issue appointments |
-| `givePermission(address)` | Patient Only | Authorizes a specific doctor to view medical details & create consults |
-| `RevokePermission(address)` | Patient Only | Revokes data access from a doctor immediately |
-| `setAppointment(...)` | Verified Doctor Only | Creates a consultation entry with diagnosis, prescription, and status |
+| `setDoctor(...)` | Public (Unregistered) | Registers a physician credential (Status: Pending Verification) |
+| `verifyDoctor(address)` | Owner / Admin Only | Approves a registered physician, granting appointment creation privileges |
+| `givePermission(address)` | Patient Only | Grants a physician permission to access medical history & log consults |
+| `RevokePermission(address)` | Patient Only | Revokes physician access immediately |
+| `setAppointment(...)` | Verified Doctor Only | Creates a clinical consultation (Diagnosis, Rx, Status) with patient consent |
 | `updateAppointment(...)` | Attending Doctor / Owner | Updates an existing consultation note or prescription |
 | `searchPatientDemographic(address)` | Authorized / Owner | Retrieves patient demographic information |
-| `searchPatientMedical(address)` | Authorized / Owner | Retrieves patient medical history, allergies, and emergency contact |
-| `searchAppointment(address)` | Patient / Doctor / Owner | Retrieves latest consultation details and prescriptions |
+| `searchPatientMedical(address)` | Authorized / Owner | Retrieves baseline medical history, allergies, and emergency contact |
+| `searchAppointment(address)` | Patient / Doctor / Owner | Retrieves consultation records and prescriptions |
 
 ---
 
-## 7. Security & Threat Model Summary
+## 9. Development Phases & Upgrade Roadmap
 
-- **On-Chain Access Boundaries:** Demographic and medical data reads are gated by `require(isApproved[_address][msg.sender])`.
-- **Identity Integrity:** Wallet addresses serve as immutable cryptographic public keys; users cannot impersonate other patients or physicians.
-- **Consultation Tamper-Resistance:** Clinical records cannot be modified by third parties; only the attending physician who created the entry can post updates.
-- **Roadmap to Zero-Knowledge & Confidentiality:** Phase 4 moves patient PII off-chain to encrypted IPFS clusters, ensuring on-chain immutability is paired with strict GDPR / HIPAA compliance and the right to privacy.
+### Phase 0: Secrets & Repository Hygiene [COMPLETED]
+- [x] **Secret Rotation & Isolation:** Deprecated exposed Infura keys and hardcoded private seed phrases.
+- [x] **Environment Variable Management:** Created `.env.example` with template variables for `RPC_URL`, `DEPLOYER_PRIVATE_KEY`, `DEPLOYER_MNEMONIC`, and `NEXT_PUBLIC_CONTRACT_ADDRESS`.
+- [x] **Secure Script Config:** Refactored `ethereum/deploy.js` and `ethereum/web3.js` to safely read environment variables using `dotenv`.
+- [x] **Dependency Optimization:** Removed unused `electron` devDependency from `package.json`.
 
 ---
 
-## 8. License
+### Phase 1: Smart Contract Security & Bug Fixes (`Record.sol`) [COMPLETED]
+- [x] **1.1 Multi-Appointment Storage:** Refactored `Record.sol` to index appointments via `Appointments[] public appointmentsList` and `mapping(address => uint[]) patientAppointments`. Appointments are never overwritten on follow-up visits.
+- [x] **1.2 Strict Consent Enforcement on Writes:** `setAppointment` strictly enforces `require(isApproved[_addr][msg.sender])`. Unapproved doctors cannot write to patient records.
+- [x] **1.3 Access-Gated Record Search:** Added cryptographic permission checks to `searchAppointment` so only the patient, the attending physician, or the admin can read sensitive prescriptions and diagnoses.
+- [x] **1.4 Admin Doctor Verification System:** Implemented `verifyDoctor(address)` so newly registered doctors require admin approval before issuing clinical appointments.
+- [x] **1.5 Permission Counter Accuracy:** Fixed `permissionGrantedCount` to increment only on first grant and properly decrement on revocation.
+- [x] **1.6 EVM Input Validation:** Added zero-address validations (`require(_addr != address(0))`) and non-empty string checks.
+- [x] **1.7 Comprehensive Event Logging:** Added `PatientRegistered`, `DoctorRegistered`, `DoctorVerified`, `AccessGranted`, `AccessRevoked`, `AppointmentCreated`, and `AppointmentUpdated`.
+- [x] **1.8 Consultation Edit Protection:** `updateAppointment` requires the caller to be the doctor who created the record (or contract owner).
+
+---
+
+### Phase 2: Frontend Design System & Role-Based UX [COMPLETED]
+- [x] **2.1 Modern Web3 Visual Identity:** Redesigned UI with deep obsidian (`#090A0E`), atmospheric ember sunset radial glow, and fiery orange (`#FF4D2D`) accents matching Web3 inspiration designs.
+- [x] **2.2 Redesigned Landing Page (`/`):** Interactive hero architecture simulator (Patient Flow vs. Doctor Flow) and 3-tier comparative role cards.
+- [x] **2.3 Dynamic Role-Aware Header (`components/MenuBar.js`):** Header queries on-chain roles in real time (`isPatient`, `isDoctor`, `isDoctorVerified`, `owner`) with instant MetaMask `accountsChanged` reactivity.
+- [x] **2.4 Actionable Error Messaging:** Replaced generic "account already exists" alerts with specific feedback (user rejected tx, unauthorized access, or validation failures).
+- [x] **2.5 Status Banners & Banishment of `alert()`:** Replaced all browser `alert()` popups with inline glassmorphic status banners and transaction progress loaders.
+- [x] **2.6 Dashboard Telemetry & Admin Panel (`/dashboard`):** Grouped registration timelines by month-year, fixed divide-by-zero risks, and added an **Admin Doctor Verification Panel**.
+- [x] **2.7 Consent Gateways (`/approve-doctor`, `/revoke-doctor`):** Added directory of registered doctors for one-click access granting, and active grants list with one-click revocation.
+- [x] **2.8 Consultation Workflow (`/make-appointment`):** Added authorized patient dropdown to prevent manual copy-paste of hex addresses.
+- [x] **2.9 Safe Client Hydration:** Migrated wallet-dependent reads (`web3.eth.getAccounts()`) to `componentDidMount` to eliminate SSR crashes.
+
+---
+
+### Phase 3: Automated Testing & Verification [COMPLETED]
+- [x] **3.1 Ganache & Mocha Test Suite:** Expanded `test/Record.test.js` to 8 comprehensive unit tests covering deployment, registration, duplicate checks, verification, consent enforcement, non-overwriting arrays, counter arithmetic, and revoked access checks.
+- [x] **3.2 Production Build Verification:** Verified Next.js 12-page static and dynamic production build with zero errors.
+- [x] **3.3 Live Sepolia Deployment:** Verified and confirmed live smart contract deployment at `0xB1Af58d43fDf8e5a637BcdeBB52DfE1E32AF0f2D`.
+
+---
+
+### Phase 4: Encrypted Off-Chain Storage (IPFS) [PLANNED]
+- [ ] **4.1 Off-Chain Architecture:** Store only cryptographic hashes and IPFS Content Identifiers (CIDs) on-chain; sensitive data (names, IC, allergies, prescriptions) stored off-chain.
+- [ ] **4.2 Client-Side Encryption:** Implement AES-256-GCM record encryption using random symmetric keys wrapped with doctor/patient public keys (ECIES or Lit Protocol).
+- [ ] **4.3 Decentralized Pinning:** Integrate Pinata / web3.storage API for decentralized storage.
+- [ ] **4.4 File Attachments:** Enable upload of lab reports, blood work PDFs, and medical scans.
+- [ ] **4.5 Zero-Knowledge Proofs:** Integrate zk-SNARKs (Circom/snarkjs) for selective disclosure (e.g. proof of eligibility without identity leak).
+
+---
+
+### Phase 5: Advanced Healthcare & Compliance Features [PLANNED]
+- [ ] **5.1 Expirable & Scoped Consent:** Implement access expiration timestamps (e.g. 7-day emergency grant) and scoped categories (Labs Only, Imaging Only).
+- [ ] **5.2 Patient Audit Trail Log:** Patient dashboard displaying a chronological timeline of which doctors viewed their record and when.
+- [ ] **5.3 Emergency Break-Glass Override:** Emergency QR-code access for first responders with logged on-chain alerts.
+- [ ] **5.4 HL7 FHIR Standard Mapping:** Standardize patient records to match international HL7 FHIR and ICD-10 medical terminology.
+- [ ] **5.5 Prescription Objects:** Expand prescriptions into independent data structures (dosage, frequency, duration, refills, active status).
+
+---
+
+### Phase 6: Tooling, Migration & DevOps [PLANNED]
+- [ ] **6.1 Hardhat / Foundry Migration:** Upgrade development harness to Hardhat with TypeScript and automated gas reporting.
+- [ ] **6.2 Frontend Upgrade:** Upgrade Next.js to App Router with TypeScript, Tailwind CSS, and `wagmi` / `viem` / `RainbowKit`.
+- [ ] **6.3 Security Auditing:** Integrate Slither and Mythril static analysis into CI pipeline.
+- [ ] **6.4 Layer 2 Deployment:** Support low-fee Ethereum Layer 2 networks (Base, Polygon, Arbitrum).
+- [ ] **6.5 Subgraph Indexing:** Deploy The Graph subgraph for real-time querying of medical events.
+
+---
+
+### Phase 7: Compliance & Enterprise Governance [PLANNED]
+- [ ] **7.1 Regulatory Mapping:** Align cryptographic architecture with HIPAA, GDPR, and India DPDP compliance.
+- [ ] **7.2 Hospital Consortium Multisig:** Multi-signature governance (Safe) for verified hospital administrative actions.
+- [ ] **7.3 Account Abstraction (ERC-4337):** Social login / gas sponsorship for non-crypto patient onboarding.
+
+---
+
+### Target Structure After Full Upgrade
+
+```text
+blockchain-hospital-record/
+├── contracts/            # Record.sol (Solidity ^0.8.20 modular contracts)
+│   ├── PatientRegistry.sol
+│   ├── DoctorRegistry.sol
+│   ├── ConsentManager.sol
+│   └── AppointmentManager.sol
+├── test/                 # Hardhat unit, fuzzing & integration tests (TypeScript)
+├── scripts/              # deploy.ts, verify.ts, seed.ts
+├── deployments/          # sepolia.json, mainnet.json, base.json
+├── frontend/             # Next.js 14+ (App Router, TypeScript, Tailwind)
+│   ├── app/              # Role-based route groups (patient, doctor, admin)
+│   ├── components/       # Modern shadcn/ui + Web3 glassmorphic design system
+│   ├── lib/              # wagmi config, crypto.ts (AES-256), ipfs.ts
+│   └── hooks/            # useRecord, useConsent, useAppointments custom hooks
+├── indexer/              # The Graph subgraph schema, mappings & ABIs
+├── .env.example          # Environment variables specification
+├── hardhat.config.ts     # Multi-network configuration & compiler settings
+└── README.md             # Project documentation, architecture & runbook
+```
+
+---
+
+## 10. License
 
 This project is licensed under the **ISC License**.
