@@ -13,7 +13,10 @@ const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
     createServer(handler).listen(3000, (err) => {
-        if(err) throw err;
-        console.log('Ready on localhost:3000');
+        if (err) throw err;
+        console.log('\n==================================================');
+        console.log('  MediBlock Web3 App Running');
+        console.log('  Local URL: http://localhost:3000 (Ctrl + Click to open)');
+        console.log('==================================================\n');
     });
 });
