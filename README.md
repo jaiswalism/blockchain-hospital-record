@@ -183,8 +183,7 @@ blockchain-hospital-record/
 ├── package.json             # Scripts & dependencies
 ├── routes.js                # Next-routes dynamic route definitions
 ├── server.js                # Custom Node.js HTTP server for Next-routes
-├── ROADMAP.md               # Detailed phase execution checklist
-└── README.md                # Project documentation & architecture
+└── README.md                # Project documentation, architecture & roadmap
 ```
 
 ---
@@ -305,8 +304,6 @@ To test locally without spending testnet ETH:
 ---
 
 ## 9. Development Phases & Upgrade Roadmap
-
-For the dedicated checklist, see [**`ROADMAP.md`**](file:///d:/Projects/blockchainrecordmanagemnet/ROADMAP.md).
 
 ### Phase 0: Secrets & Repository Hygiene [COMPLETED]
 - [x] **Secret Rotation & Isolation:** Deprecated exposed Infura keys and hardcoded private seed phrases.
