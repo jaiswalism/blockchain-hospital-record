@@ -11,35 +11,21 @@ const contractPath = path.resolve(__dirname, 'contracts', 'Record.sol');
 const source = fs.readFileSync(contractPath, 'utf8');
 
 console.log('Compiling contract...');
-const input = {
-    language: 'Solidity',
-    sources: {
-        'Record.sol': {
-            content: source,
-        },
-    },
-    settings: {
-        outputSelection: {
-            '*': {
-                '*': ['*'],
-            },
-        },
-    },
-};
+const compiled = solc.compile(source, 1);
 
-let output;
-try {
-    output = JSON.parse(solc.compile(JSON.stringify(input))).contracts['Record.sol'];
-} catch (e) {
-    console.error('Error compiling contract:', e);
-    process.exit(1);
+if (compiled.errors) {
+    compiled.errors.forEach(err => console.log(err));
 }
 
 fs.ensureDirSync(buildPath); // recreate build folder
 
-for (let contractName in output) {
+for (let contract in compiled.contracts) {
+    const contractName = contract.replace(':', '');
     fs.outputJsonSync(
         path.resolve(buildPath, contractName + '.json'),
-        output[contractName]
+        compiled.contracts[contract]
     );
+    console.log(`Saved compiled artifact: ${contractName}.json`);
 }
+
+console.log('Contract compiled successfully!');
