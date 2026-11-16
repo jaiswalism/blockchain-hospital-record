@@ -38,19 +38,22 @@ const deploy = async () => {
         deployerAddress = account.address;
         console.log(`✔ Using Deployer Private Key for address: ${deployerAddress}`);
     } else if (mnemonic && !mnemonic.includes('placeholder')) {
-        // Option 2: Mnemonic via HDWalletProvider
+        // Option 2: Mnemonic via BIP39 / HDKey (modern, direct, reliable)
         try {
-            const HDWalletProvider = require('truffle-hdwallet-provider');
-            provider = new HDWalletProvider(mnemonic, rpcUrl);
-            web3 = new Web3(provider);
-            const accounts = await web3.eth.getAccounts();
-            if (!accounts || accounts.length === 0) {
-                throw new Error('No accounts could be derived from DEPLOYER_MNEMONIC.');
-            }
-            deployerAddress = accounts[0];
-            console.log(`✔ Using Mnemonic for address: ${deployerAddress}`);
+            const bip39 = require('bip39');
+            const hdkey = require('ethereumjs-wallet/hdkey');
+            const seed = bip39.mnemonicToSeed(mnemonic.trim());
+            const wallet = hdkey.fromMasterSeed(seed).derivePath("m/44'/60'/0'/0/0").getWallet();
+            const derivedPrivateKey = '0x' + wallet.getPrivateKey().toString('hex');
+            
+            web3 = new Web3(new Web3.providers.HttpProvider(rpcUrl));
+            const account = web3.eth.accounts.privateKeyToAccount(derivedPrivateKey);
+            web3.eth.accounts.wallet.add(account);
+            web3.eth.defaultAccount = account.address;
+            deployerAddress = account.address;
+            console.log(`✔ Derived address from mnemonic: ${deployerAddress}`);
         } catch (e) {
-            console.error('HDWalletProvider initialization failed:', e.message);
+            console.error('Mnemonic key derivation failed:', e.message);
             process.exit(1);
         }
     } else {
@@ -79,16 +82,34 @@ const deploy = async () => {
             process.exit(1);
         }
 
-        console.log(`\nSubmitting deployment transaction to network (gas limit: 4,500,000)...`);
+        const bytecode = compiledRecord.bytecode.startsWith('0x')
+            ? compiledRecord.bytecode
+            : `0x${compiledRecord.bytecode}`;
 
         const contractInstance = new web3.eth.Contract(JSON.parse(compiledRecord.interface));
         const deployTx = contractInstance.deploy({
-            data: compiledRecord.bytecode,
+            data: bytecode,
         });
+
+        console.log('Estimating gas needed for contract deployment...');
+        let gasLimit = 4800000;
+        try {
+            const gasEstimate = await deployTx.estimateGas({ from: deployerAddress });
+            gasLimit = Math.floor(gasEstimate * 1.25);
+            console.log(`Estimated gas: ${gasEstimate} (using safe limit: ${gasLimit})`);
+        } catch (e) {
+            console.log(`Gas estimation fallback to ${gasLimit} (${e.message})`);
+        }
+
+        const gasPrice = await web3.eth.getGasPrice();
+        console.log(`Current Sepolia gas price: ${web3.utils.fromWei(gasPrice, 'gwei')} Gwei`);
+
+        console.log(`Submitting deployment transaction to Sepolia network...`);
 
         const deployedContract = await deployTx.send({
             from: deployerAddress,
-            gas: '4500000',
+            gas: gasLimit,
+            gasPrice: gasPrice,
         });
 
         const deployedAddress = deployedContract.options.address;
